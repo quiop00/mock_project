@@ -9,7 +9,6 @@ This file only wires the graph; logic is split across:
 """
 
 from langgraph.graph import StateGraph, START, END
-from langgraph.checkpoint.memory import MemorySaver
 
 from internal_chatbot.internal_chatbot_state import ChatbotInput, ChatbotState
 from internal_chatbot.internal_chatbot_nodes import (
@@ -48,9 +47,7 @@ builder.add_conditional_edges(
 builder.add_edge("error_handler", END)
 builder.add_edge("update_conversation_state", END)
 
-checkpointer = MemorySaver()
 chatbot_graph = builder.compile(
-    checkpointer=checkpointer,
     interrupt_before=[],
 )
 

@@ -17,10 +17,8 @@ from internal_chatbot import internal_chatbot_config as cfg
 
 def _load_internal_documents(doc_path: str) -> List[Document]:
     base = Path(doc_path)
-    if not base.exists():
-        raise FileNotFoundError(
-            f"Internal docs path '{doc_path}' not found. Provide PDFs/DOCX there."
-        )
+    # Create directory if it doesn't exist
+    base.mkdir(parents=True, exist_ok=True)
 
     docs: List[Document] = []
 
