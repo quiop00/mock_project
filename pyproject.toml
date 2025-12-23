@@ -1,0 +1,60 @@
+[project]
+name = "internal_chatbot"
+version = "0.1.0"
+description = "Internal RAG chatbot with LangGraph"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+"langgraph>=1.0.0",
+"langchain>=1.0.0",
+"langchain-openai>=1.0.0",
+"langsmith>=0.1.0",
+"langchain_community>=0.4",
+"langchain_mcp_adapters>=0.1.11",
+"pydantic>=2.0.0",
+"rich>=14.0.0",
+"ipykernel>=6.20.0",
+"faiss-cpu>=1.8.0",
+"pypdf>=4.0.0",
+"docx2txt>=0.8",
+"sentence-transformers>=3.2.1",
+]
+
+[project.optional-dependencies]
+dev = ["mypy>=1.11.1", "ruff>=0.6.1"]
+
+[build-system]
+requires = ["setuptools>=73.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["internal_chatbot"]
+
+[tool.setuptools.package-dir]
+"internal_chatbot" = "src/internal_chatbot"
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]
+
+[tool.ruff]
+lint.select = [
+    "E",    # pycodestyle
+    "F",    # pyflakes
+    "I",    # isort
+    "D",    # pydocstyle
+    "D401", # First line should be in imperative mood
+    "T201",
+    "UP",
+]
+lint.ignore = [
+    "UP006",
+    "UP007",
+    "UP035",
+    "D417",
+    "E501",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D", "UP"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
