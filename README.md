@@ -4,8 +4,8 @@ Minimal internal chatbot that always retrieves from your internal PDF/DOCX docs 
 
 ## Features
 - RAG-first: retrieve before every answer; no hallucinated info.
-- Multi-turn: conversation history kept via LangGraph state + MemorySaver.
-- Vector store: FAISS (default) or Chroma; embeddings: OpenAI (default) or HuggingFace.
+- Multi-turn: conversation history kept via LangGraph state.
+- Vector store: FAISS (default) or Chroma; embeddings: OpenAI.
 - Chunking: tiktoken-based, default 600/80 tokens chunk/overlap.
 - LangSmith tracing: `@traceable` on nodes; default run metadata/tags when config not supplied.
 - Fallback message enforced when retrieval has no context.
@@ -22,8 +22,7 @@ Minimal internal chatbot that always retrieves from your internal PDF/DOCX docs 
 
 ## Prerequisites
 - Python 3.11–3.13
-- OpenAI API key (default embeddings + chat model)
-- (Optional) HuggingFace embeddings if `EMBEDDINGS_PROVIDER=hf`
+- OpenAI API key (for embeddings + chat model)
 - (Optional) LangSmith account for tracing (`LANGSMITH_API_KEY`)
 
 ## Setup
@@ -31,6 +30,10 @@ Minimal internal chatbot that always retrieves from your internal PDF/DOCX docs 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
+```
+
+```CMD
+.venv\Scripts\Activate.ps1
 ```
 
 2) Install deps (requires network to fetch wheels):
@@ -41,9 +44,6 @@ python3 -m pip install -e .
 3) Prepare `.env` in repo root:
 ```env
 OPENAI_API_KEY=sk-...
-# Optional: use HF embeddings instead of OpenAI
-# EMBEDDINGS_PROVIDER=hf
-# HF_EMBEDDINGS_MODEL=sentence-transformers/all-MiniLM-L6-v2
 # Optional: LangSmith tracing
 # LANGCHAIN_TRACING_V2=true
 # LANGCHAIN_PROJECT=internal-chatbot
@@ -55,20 +55,11 @@ OPENAI_API_KEY=sk-...
 
 ## Run with LangGraph Dev
 ```bash
-langgraph dev --graph internal_chatbot
+langgraph dev
 ```
-Then open the LangGraph Studio URL shown in the console. Invoke with:
-```json
-{ "message": "Your internal question here" }
-```
+If There have error No module found, please run 'export PYTHONPATH=./src' first, then install the lib and run 'langgraph dev' again.
 
-## Env Tweaks (optional)
-- `VECTOR_STORE=faiss|chroma` (default `faiss`)
-- `VECTOR_STORE_PATH=var/vector_store/internal`
-- `CHUNK_SIZE_TOKENS=600`
-- `CHUNK_OVERLAP_TOKENS=80`
-- `RETRIEVAL_K=4`
-- `MAX_HISTORY_MESSAGES=12`
+Then open the LangGraph Studio URL shown in the console. Typing the question
 
 ## Fallback Behavior
 If retrieval returns no context, the bot replies:

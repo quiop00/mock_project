@@ -10,10 +10,6 @@ VECTOR_STORE = os.getenv("VECTOR_STORE", "faiss")  # faiss | chroma
 VECTOR_STORE_PATH = os.getenv("VECTOR_STORE_PATH", "var/vector_store/internal")
 
 # Embeddings
-EMBEDDINGS_PROVIDER = os.getenv("EMBEDDINGS_PROVIDER", "openai")  # openai | hf
-HF_EMBEDDINGS_MODEL = os.getenv(
-    "HF_EMBEDDINGS_MODEL", "sentence-transformers/all-MiniLM-L6-v2"
-)
 OPENAI_EMBEDDING_MODEL = os.getenv(
     "OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"
 )
@@ -37,8 +33,6 @@ __all__ = [
     "INTERNAL_DOCS_PATH",
     "VECTOR_STORE",
     "VECTOR_STORE_PATH",
-    "EMBEDDINGS_PROVIDER",
-    "HF_EMBEDDINGS_MODEL",
     "OPENAI_EMBEDDING_MODEL",
     "CHUNK_SIZE_TOKENS",
     "CHUNK_OVERLAP_TOKENS",

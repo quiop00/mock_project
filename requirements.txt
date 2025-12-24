@@ -10,6 +10,5 @@ ipykernel>=6.20.0
 faiss-cpu>=1.8.0
 pypdf>=6.5.0
 docx2txt>=0.8
-sentence-transformers>=3.2.1
 langchain-text-splitters>=1.1.0
 

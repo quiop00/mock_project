@@ -7,7 +7,6 @@ from typing import List
 
 from langchain_core.documents import Document
 from langchain_community.document_loaders import PyPDFLoader, Docx2txtLoader
-from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS, Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -39,9 +38,6 @@ def _load_internal_documents(doc_path: str) -> List[Document]:
 
 
 def _get_embeddings():
-    if cfg.EMBEDDINGS_PROVIDER.lower() == "hf":
-        return HuggingFaceEmbeddings(model_name=cfg.HF_EMBEDDINGS_MODEL)
-
     return OpenAIEmbeddings(model=cfg.OPENAI_EMBEDDING_MODEL)
 
 

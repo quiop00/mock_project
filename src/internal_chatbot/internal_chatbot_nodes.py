@@ -22,12 +22,19 @@ _chat_model = init_chat_model(model="openai:gpt-4o-mini")
 
 @traceable(run_type="chain", metadata={"node": "receive_user_message"})
 def receive_user_message(state: ChatbotState, config: Optional[RunnableConfig] = None):
+    # Try to get message from input (from ChatbotInput schema) or existing state
     message = state.get("message") or state.get("user_message")
+    
     if not message:
-        logger.warning("Missing user message in state")
+        # Log state keys for debugging
+        state_keys = list(state.keys()) if isinstance(state, dict) else []
+        logger.warning(
+            "Missing user message in state",
+            extra={"state_keys": state_keys, "state": str(state)[:200]},
+        )
         return {"error": "Missing user message."}
 
-    logger.info("Received user message", extra={"message": message})
+    logger.info("Received user message", extra={"user_message": message})
     return {
         "user_message": message,
         "messages": [HumanMessage(content=message)],
@@ -39,7 +46,10 @@ def retrieve_relevant_docs(
     state: ChatbotState, config: Optional[RunnableConfig] = None
 ) -> Dict:
     try:
-        results = RETRIEVER.get_relevant_documents(state["user_message"])
+        # Use invoke() for LangChain Runnable interface (newer API)
+        # In LangChain >= 0.1.46, get_relevant_documents() was replaced with invoke()
+        results = RETRIEVER.invoke(state["user_message"])
+        
         contexts, sources = format_docs_as_context(results)
         logger.info(
             "Retrieved documents",

@@ -14,17 +14,18 @@ from typing import List, Optional, Sequence, Tuple
 from langgraph.graph.message import add_messages
 from langchain_core.messages import BaseMessage
 from langchain_core.documents import Document
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class ChatbotState(TypedDict):
     """State carried across LangGraph nodes for the internal chatbot."""
 
     messages: Annotated[Sequence[BaseMessage], add_messages]
-    user_message: str
+    message: NotRequired[Optional[str]]  # Input message from user (from ChatbotInput)
+    user_message: NotRequired[str]  # Processed user message
     retrieval_context: Annotated[List[str], operator.add]
     retrieval_sources: Annotated[List[str], operator.add]
-    error: Optional[str]
+    error: NotRequired[Optional[str]]
 
 
 class ChatbotInput(TypedDict):
