@@ -90,7 +90,6 @@ class TestChatbotGraph:
         mock_retriever.invoke = Mock(return_value=[])
         
         checkpointer = MemorySaver()
-        from internal_chatbot.internal_chatbot import builder
         graph = builder.compile(checkpointer=checkpointer)
         
         config = RunnableConfig(
@@ -129,7 +128,6 @@ class TestChatbotGraph:
         mock_chat_model.ainvoke = AsyncMock(return_value=mock_response)
         
         checkpointer = MemorySaver()
-        from internal_chatbot.internal_chatbot import builder
         graph = builder.compile(checkpointer=checkpointer)
         
         thread_id = "test-thread-3"
@@ -161,7 +159,6 @@ class TestChatbotGraph:
         mock_retriever.invoke = Mock(side_effect=Exception("Database connection failed"))
         
         checkpointer = MemorySaver()
-        from internal_chatbot.internal_chatbot import builder
         graph = builder.compile(checkpointer=checkpointer)
         
         config = RunnableConfig(
@@ -211,7 +208,6 @@ class TestLangSmithIntegration:
         mock_chat_model.ainvoke = AsyncMock(return_value=mock_response)
         
         checkpointer = MemorySaver()
-        from internal_chatbot.internal_chatbot import builder
         graph = builder.compile(checkpointer=checkpointer)
         
         config = RunnableConfig(

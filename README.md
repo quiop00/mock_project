@@ -69,3 +69,42 @@ I could not find this information in the internal documents. Would you like me t
 
 ## LangSmith Tracing
 - Nodes are decorated with `@traceable`; if you set `LANGCHAIN_TRACING_V2=true` and `LANGCHAIN_PROJECT=internal-chatbot` (plus `LANGSMITH_API_KEY` if needed), traces appear in LangSmith.
+
+# Tests for Internal Chatbot
+
+This directory contains unit and integration tests for the internal RAG chatbot, with LangSmith tracing and evaluation support.
+
+## Setup
+
+### Install test dependencies:
+```bash
+pip install -e ".[dev]"
+```
+
+Or install from requirements:
+```bash
+pip install -r requirements.txt
+pip install pytest pytest-asyncio python-dotenv
+```
+
+### Environment Variables
+
+Tests automatically load `.env` file from project root. Create a `.env` file with:
+
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Optional: LangSmith tracing
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_PROJECT=internal-chatbot-tests
+LANGSMITH_API_KEY=your_langsmith_api_key_here
+```
+
+**Note**: Tests use mocks for API calls, so you don't need a real API key for most tests. However, if you want to test with real API calls, set a valid `OPENAI_API_KEY`.
+
+## Running Tests
+
+### Run all tests:
+```bash
+pytest
+```
