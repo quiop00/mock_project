@@ -8,10 +8,11 @@ pydantic>=2.0.0
 rich>=14.0.0
 ipykernel>=6.20.0
 faiss-cpu>=1.8.0
-pypdf>=4.0.0
+pypdf>=6.5.0
 docx2txt>=0.8
-sentence-transformers>=3.2.1
 
 [dev]
 mypy>=1.11.1
 ruff>=0.6.1
+pytest>=7.4.0
+pytest-asyncio>=0.21.0

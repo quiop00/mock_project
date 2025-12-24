@@ -12,3 +12,6 @@ src/internal_chatbot/internal_chatbot_nodes.py
 src/internal_chatbot/internal_chatbot_prompts.py
 src/internal_chatbot/internal_chatbot_retriever.py
 src/internal_chatbot/internal_chatbot_state.py
+tests/test_chatbot_graph.py
+tests/test_chatbot_nodes.py
+tests/test_langsmith_evaluation.py

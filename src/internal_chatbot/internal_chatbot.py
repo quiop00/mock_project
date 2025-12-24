@@ -51,5 +51,5 @@ chatbot_graph = builder.compile(
     interrupt_before=[],
 )
 
-__all__ = ["chatbot_graph"]
+__all__ = ["chatbot_graph", "builder"]
 
